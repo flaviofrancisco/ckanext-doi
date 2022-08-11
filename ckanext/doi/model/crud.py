@@ -50,7 +50,7 @@ class DOIQuery:
         record = Session.query(DOI).filter(DOI.package_id == package_id).first()
         if record is None and create_if_none:
             client = DataciteClient()
-            new_doi = client.generate_doi()
+            new_doi = client.generate_doi(package_id)
             record = cls.create(new_doi, package_id)
         return record
 

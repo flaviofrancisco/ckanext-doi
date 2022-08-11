@@ -62,7 +62,7 @@ class DataciteClient:
                              f'prefix defined in your datacite test account')
         return prefix
 
-    def generate_doi(self):
+    def generate_doi(self, package_id=None):
         '''
         Generate a new DOI which isn't currently in use. The database is checked for previous
         usage, as is Datacite itself. Use whatever value is retuned from this function quickly to
@@ -78,7 +78,7 @@ class DataciteClient:
 
         while attempts > 0:
             # generate a random 8 character identifier
-            identifier = ''.join(random.choice(valid_characters) for _ in range(8))
+            identifier = package_id if not package_id is None else ''.join(random.choice(valid_characters) for _ in range(8))
             # form the doi using the prefix
             doi = f'{self.prefix}/{identifier}'
 
