@@ -38,16 +38,19 @@ def delete_dois():
     '''
     Delete all DOIs from the database.
     '''
-    to_delete = Session.query(DOI).filter(
-        DOI.identifier.like(f'%{DataciteClient.get_prefix()}%'))
-    doi_count = to_delete.count()
-    if doi_count == 0:
-        click.secho('Nothing to delete', fg='green')
-        return
-    if click.confirm(f'Delete {doi_count} DOIs from the database?', abort=True):
-        to_delete.delete(synchronize_session=False)
-        Session.commit()
-        click.secho(f'Deleted {doi_count} DOIs from the database')
+    try:
+        to_delete = Session.query(DOI).filter(
+            DOI.identifier.like(f'%{DataciteClient.get_prefix()}%'))
+        doi_count = to_delete.count()
+        if doi_count == 0:
+            click.secho('Nothing to delete', fg='green')
+            return
+        if click.confirm(f'Delete {doi_count} DOIs from the database?', abort=True):
+            to_delete.delete(synchronize_session=False)
+            Session.commit()
+            click.secho(f'Deleted {doi_count} DOIs from the database')
+    except:
+        print('An error trying to delete a DOI.')            
 
 
 @doi.command(name='update-doi')
