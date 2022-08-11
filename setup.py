@@ -29,7 +29,7 @@ setup(
     keywords='CKAN data doi',
     author='Natural History Museum',
     author_email='data@nhm.ac.uk',
-    url='https://github.com/NaturalHistoryMuseum/ckanext-doi',
+    url='https://github.com/flaviofrancisco/ckanext-doi',
     license='GNU GPLv3',
     packages=find_packages(exclude=['tests']),
     namespace_packages=['ckanext', 'ckanext.doi'],
